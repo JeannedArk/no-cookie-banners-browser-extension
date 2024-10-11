@@ -19,7 +19,7 @@ jobs:
           echo "Release: ${{ github.ref_name }}" > Release.txt
           echo ${{ github.sha }} >> Release.txt
           mkdir -p release
-          cp *.js *.html *.json images Release.txt LICENSE release/
+          cp -r *.js *.html *.json images Release.txt LICENSE release/
           zip -r release.zip release/
 
       - name: Release

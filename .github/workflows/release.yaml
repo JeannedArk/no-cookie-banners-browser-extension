@@ -1,0 +1,30 @@
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+name: Create Release
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare Release
+        shell: bash
+        run: |
+          echo ${{ github.sha }} > Release.txt
+          zip -r release.zip *.js *.html *.png Release.txt LICENSE
+          # zip -r app.zip app.app/
+          # mv app.zip PRODYNAHubSpotAssistant.zip
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Chrome Extension Release
+          tag_name: ${{ github.ref_name }}.linux
+          fail_on_unmatched_files: true
+          files: |
+            Release.txt
+            release.zip

@@ -17,6 +17,7 @@
             "matches": ["<all_urls>"],
             "js": [
                 "utility.js",
+                "logger.js",
                 "texts.js",
                 "main.js"
             ]

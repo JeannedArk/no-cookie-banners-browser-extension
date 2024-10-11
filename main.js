@@ -1,10 +1,12 @@
+let logger = new Logger("NoCookieBanners", false);
 let declineCookieButtonPressed = false;
+const TIMEOUT_DELAYED_SEARCH = 2000;
 
 function clickCookieBanner() {
-  console.log("[NoCookieBanners] clickCookieBanner");
+  logger.log("clickCookieBanner");
   const cookieButtons = getAllCookieDeclineButtons();
   const cookieButtonTexts = cookieButtons.map((cookieButton) => cookieButton.textContent);
-  console.log("[NoCookieBanners] cookieButtons", {cookieButtonTexts, cookieButtons});
+  logger.log("cookieButtons", {cookieButtonTexts, cookieButtons});
   if (cookieButtons?.length) {
     cookieButtons.forEach((cookieButton) => {
       cookieButton.click();
@@ -14,24 +16,24 @@ function clickCookieBanner() {
 }
 
 function clickCookieBannerWhenNotTriggered() {
-  console.log("[NoCookieBanners] clickCookieBannerWhenNotTriggered", {declineCookieButtonPressed});
+  logger.log("clickCookieBannerWhenNotTriggered", {declineCookieButtonPressed});
   if (!declineCookieButtonPressed) {
     clickCookieBanner();
   }
 }
 
 function clickCookieBannerWhenPageReady() {
-  console.log("[NoCookieBanners] Start");
+  logger.log("Start");
   
   window.addEventListener('load', function () {
-    console.log("-- [NoCookieBanners] event load");
+    logger.log("clickCookieBannerWhenPageReady event load");
     clickCookieBannerWhenNotTriggered();
   });
   
   setTimeout(() => {
-    console.log("-- [NoCookieBanners] event delayed");
+    logger.log("clickCookieBannerWhenPageReady event delayed");
     clickCookieBannerWhenNotTriggered();
-  }, 2000);
+  }, TIMEOUT_DELAYED_SEARCH);
 }
 
 function getHTMLElementsWithinIframes(querySelector) {
@@ -60,7 +62,7 @@ function getCookieDeclineHTMLElementsSingleLabeledButton(querySelector) {
 
   const cookieButtonTexts = buttons.map((cookieButton) => cookieButton.textContent);
   const cookieButtonDeclineTexts = getButtonCookieDeclineTexts();
-  console.log("[NoCookieBanners] getCookieDeclineHTMLElementsSingleLabeledButton", {cookieButtonTexts, buttons});
+  logger.log("getCookieDeclineHTMLElementsSingleLabeledButton", {cookieButtonTexts, buttons});
   return buttons
     .filter(isHTMLElementVisible)
     .filter((button) => {
@@ -77,11 +79,11 @@ function getCookieDeclineHTMLElementsInFlatMenu(querySelector) {
       const isCookieContext = divText.includes('cookie');
       
       if (isCookieContext) {
-        console.log("[NoCookieBanners] getCookieDeclineHTMLElementsInFlatMenu", {divText, isCookieContext});
+        logger.log("getCookieDeclineHTMLElementsInFlatMenu", {divText, isCookieContext});
         // Check if it contains a child element
         const buttons = Array.from(div.querySelectorAll(querySelector));
         const cookieButtonTexts = buttons.map((cookieButton) => cookieButton.textContent);
-        console.log("[NoCookieBanners] getCookieDeclineHTMLElementsInFlatMenu", {cookieButtonTexts});
+        logger.log("getCookieDeclineHTMLElementsInFlatMenu", {cookieButtonTexts});
         return buttons
           .filter(isHTMLElementVisible)
           .filter((button) => {
@@ -108,9 +110,3 @@ function getAllCookieDeclineButtons() {
 }
 
 clickCookieBannerWhenPageReady();
-
-
-
-
-// Array.from(document.querySelectorAll("a")).filter((button) => button.textContent.includes("Cookies"))
-// Array.from(document.querySelectorAll("div")).filter((button) => button.textContent.includes("Cookies")).map((elem) => elem.textContent?.substring(0, 20));

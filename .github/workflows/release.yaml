@@ -16,10 +16,11 @@ jobs:
       - name: Prepare Release
         shell: bash
         run: |
-          echo ${{ github.sha }} > Release.txt
-          zip -r release.zip *.js *.html *.png Release.txt LICENSE
-          # zip -r app.zip app.app/
-          # mv app.zip PRODYNAHubSpotAssistant.zip
+          echo "Release: ${{ github.ref_name }}" > Release.txt
+          echo ${{ github.sha }} >> Release.txt
+          mkdir -p release
+          cp **/.js **/.html **/.json images Release.txt LICENSE release/
+          zip -r release.zip release/
 
       - name: Release
         uses: softprops/action-gh-release@v2

@@ -3,6 +3,8 @@ on:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 name: Create Release
+permissions:
+  contents: write
 jobs:
   build:
     name: Create Release
@@ -20,10 +22,10 @@ jobs:
           # mv app.zip PRODYNAHubSpotAssistant.zip
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: Chrome Extension Release
-          tag_name: ${{ github.ref_name }}.linux
+          tag_name: ${{ github.ref_name }}
           fail_on_unmatched_files: true
           files: |
             Release.txt

@@ -33,10 +33,20 @@ const DECLINE_TEXTS = [
     "Decline",
     "Reject",
     "no thanks",
+    "not agree",
 
     // German
     "Ablehnen",
     "Nein danke",
+
+    // Spanish
+    "Rechazar",
+
+    // French
+    "refuser",
+
+    // Dutch
+    "weigeren"
 ];
 
 /**

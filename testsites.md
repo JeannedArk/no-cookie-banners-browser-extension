@@ -4,7 +4,6 @@
 | English | https://www.gov.uk/ | Y | | |
 | English | https://www.europarl.europa.eu/portal/en | Y | | |
 | English | https://www.facebook.com/ | Y | | |
-| English | https://www.att.com/ | N | | Uses opt out |
 | English | https://www.vodafone.com/ | Y | | |
 | English | https://developer.chrome.com/docs/webstore/publish | Y | | |
 | English | https://www.bbc.com/ | N | | Doesn't work yet because of the form layout |

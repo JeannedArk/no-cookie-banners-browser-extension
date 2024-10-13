@@ -1,4 +1,4 @@
-let logger = new Logger("NoCookieBanners", false);
+let logger = new Logger("NoCookieBanners", true);
 let declineCookieButtonPressed = false;
 const TIMEOUT_DELAYED_SEARCH = 2000;
 

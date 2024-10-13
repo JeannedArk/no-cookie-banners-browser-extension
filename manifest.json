@@ -4,22 +4,22 @@
     "description": "This extension automatically clicks cookie banners away.",
     "version": "0.1",
     "icons": {
-        "16": "images/cookie-icon-16.png",
-        "32": "images/cookie-icon-32.png",
-        "128": "images/cookie-icon-128.png"
+        "16": "images/icons/cookie-icon-16.png",
+        "32": "images/icons/cookie-icon-32.png",
+        "128": "images/icons/cookie-icon-128.png"
     },
     "action": {
       "default_popup": "popup.html",
-      "default_icon": "images/cookie-icon-16.png"
+      "default_icon": "images/icons/cookie-icon-16.png"
     },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
             "js": [
-                "utility.js",
-                "logger.js",
-                "texts.js",
-                "main.js"
+                "scripts/utility.js",
+                "scripts/logger.js",
+                "scripts/texts.js",
+                "scripts/main.js"
             ]
         }
     ]

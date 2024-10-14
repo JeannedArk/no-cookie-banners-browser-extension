@@ -3,10 +3,9 @@ let declineCookieButtonPressed = false;
 const TIMEOUT_DELAYED_SEARCH = 2000;
 
 function clickCookieBanner() {
-  logger.log("clickCookieBanner");
   const cookieButtons = getAllCookieDeclineButtons();
   const cookieButtonTexts = cookieButtons.map((cookieButton) => cookieButton.textContent);
-  logger.log("cookieButtons", {cookieButtonTexts, cookieButtons});
+  logger.log("clickCookieBanner", {cookieButtonTexts, cookieButtons});
   if (cookieButtons?.length) {
     cookieButtons.forEach((cookieButton) => {
       cookieButton.click();
@@ -39,9 +38,10 @@ function clickCookieBannerWhenPageReady() {
 function getAllCookieDeclineHTMLElements(querySelector) {
   const buttonsSingleLabeledButton = getCookieDeclineHTMLElementsSingleLabeledButton(querySelector);
   const buttonsInFlatMenu = getCookieDeclineHTMLElementsInFlatMenu(querySelector);
+  const buttonsInNestedMenu = getCookieDeclineHTMLElementsInNestedMenu(querySelector);
   
   // Deduplication
-  return Array.from(new Set([...buttonsSingleLabeledButton, ...buttonsInFlatMenu]));
+  return toDeduplicatedArray([...buttonsSingleLabeledButton, ...buttonsInFlatMenu, ...buttonsInNestedMenu]);
 }
 
 function getAllCookieDeclineButtons() {

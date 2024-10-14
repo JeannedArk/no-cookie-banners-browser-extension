@@ -19,6 +19,7 @@
                 "scripts/utility.js",
                 "scripts/logger.js",
                 "scripts/texts.js",
+                "scripts/clickableexecutor.js",
                 "scripts/htmlprocessor.js",
                 "scripts/main.js"
             ]

@@ -17,20 +17,20 @@ function isHTMLElementVisible(htmlElement) {
     return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
 }
 
-function getCookieDeclineHTMLElementsSingleLabeledButton(querySelector) {
-    const buttonsDocument = Array.from(document.querySelectorAll(querySelector)) || [];
-    // const buttonsIframe = getHTMLElementsWithinIframes();
-    const buttons = buttonsDocument;
-
-    const cookieButtonTexts = buttons.map((cookieButton) => cookieButton.textContent);
-    const cookieButtonDeclineTexts = getButtonCookieDeclineTexts();
-    logger.log("getCookieDeclineHTMLElementsSingleLabeledButton", { cookieButtonTexts, buttons });
+function getHTMLElementsSingleLabeledButton(querySelector, textWhitelist, fullMatch) {
+    const buttons = Array.from(document.querySelectorAll(querySelector)) || [];
     return buttons
         .filter(isHTMLElementVisible)
         .filter((button) => {
-            const buttonText = stringTrimAndToLowerCase(button.textContent);
-            return cookieButtonDeclineTexts.includes(buttonText);
+            return fullMatch
+                ? fullTextMatch(textWhitelist, button.textContent)
+                : partialTextMatch(textWhitelist, button.textContent);
         });
+}
+
+function getCookieDeclineHTMLElementsSingleLabeledButton(querySelector) {
+    const cookieButtonDeclineTexts = getButtonCookieDeclineTexts();
+    return getHTMLElementsSingleLabeledButton(querySelector, cookieButtonDeclineTexts, true);
 }
 
 function getCookieDeclineHTMLElementsInFlatMenu(querySelector) {
@@ -44,17 +44,61 @@ function getCookieDeclineHTMLElementsInFlatMenu(querySelector) {
                 logger.log("getCookieDeclineHTMLElementsInFlatMenu", { divText, isCookieContext });
                 // Check if it contains a child element
                 const buttons = Array.from(div.querySelectorAll(querySelector));
-                const cookieButtonTexts = buttons.map((cookieButton) => cookieButton.textContent);
-                logger.log("getCookieDeclineHTMLElementsInFlatMenu", { cookieButtonTexts });
+                const buttonsTexts = buttons.map((cookieButton) => cookieButton.textContent);
+                logger.log("getCookieDeclineHTMLElementsInFlatMenu", { buttonsTexts });
                 return buttons
                     .filter(isHTMLElementVisible)
-                    .filter((button) => {
-                        const buttonText = stringTrimAndToLowerCase(button.textContent);
-                        return declineTexts.some(declineText => buttonText.includes(declineText));
-                    });
+                    .filter((button) => partialTextMatch(declineTexts, button.textContent));
             } else {
                 return [];
             }
         })
         .flat();
+}
+
+function clickSettingsButtonAndSearchForDecline(querySelector, settingsButton) {
+    settingsButton.click();
+
+    logger.log("--- clickSettingsButtonAndSearchForDecline", {
+        settingsButtonText: settingsButton.textContent,
+    });
+
+    const settingActionTexts = getSettingActionTexts();
+    const settingActionButtons = getHTMLElementsSingleLabeledButton(querySelector, settingActionTexts, false);
+    logger.log("clickSettingsButtonAndSearchForDecline", {
+        settingActionButtonsTexts: settingActionButtons.map((button) => button.textContent),
+        settingActionButtons,
+    });
+    settingActionButtons.forEach((button) => {
+        button.click();
+    });
+}
+
+function getCookieDeclineHTMLElementsInNestedMenu(querySelector) {
+    const settingTexts = getSettingTexts();
+    const cookieSettingsButtons = Array.from(document.querySelectorAll('div'))
+        .map(div => {
+            const divText = stringTrimAndToLowerCase(div.textContent);
+            const isCookieContext = divText.includes('cookie');
+
+            if (isCookieContext) {
+                // Check if it contains a child element
+                const buttons = Array.from(div.querySelectorAll(querySelector));
+                return buttons
+                    .filter(isHTMLElementVisible)
+                    .filter((button) => partialTextMatch(settingTexts, button.textContent));
+            } else {
+                return [];
+            }
+        })
+        .flat();
+    
+    return toDeduplicatedArray(cookieSettingsButtons)
+        .map((cookieSettingButton) => {
+            const fn = () => {
+                clickSettingsButtonAndSearchForDecline(querySelector, cookieSettingButton);
+            };
+
+            return new ClickableExecutor(fn);
+        });
 }

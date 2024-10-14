@@ -55,3 +55,41 @@ const DECLINE_TEXTS = [
 function getDeclineTexts() {
     return stringsTrimAndToLowerCase(DECLINE_TEXTS);
 }
+
+
+const SETTING_TEXTS = [
+    // English
+    "Settings",
+    "Configure",
+
+    // German
+    "Einstellungen",
+    "anpassen",
+    "verwalten",
+];
+
+/**
+ * @returns {string[]}
+ */
+function getSettingTexts() {
+    return stringsTrimAndToLowerCase(SETTING_TEXTS);
+}
+
+
+const SETTING_SAVE_TEXTS = [
+    // English
+    // "Settings",
+    "Save",
+
+    // German
+    "speichern",
+];
+
+const SETTING_ACTION_TEXTS = [...DECLINE_TEXTS, ...SETTING_SAVE_TEXTS];
+
+/**
+ * @returns {string[]}
+ */
+function getSettingActionTexts() {
+    return stringsTrimAndToLowerCase(SETTING_ACTION_TEXTS);
+}

@@ -1,5 +1,3 @@
-// TODO sync or local?
-
 function clearStorage() {
     chrome.storage.sync.clear();
 }

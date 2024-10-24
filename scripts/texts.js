@@ -80,6 +80,7 @@ const SETTING_SAVE_TEXTS = [
     // English
     // "Settings",
     "Save",
+    "Confirm",
 
     // German
     "speichern",

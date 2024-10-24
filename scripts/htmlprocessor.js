@@ -5,7 +5,7 @@ function getHTMLElementsWithinIframes(querySelector) {
                 const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 return Array.from(iframeDocument.querySelectorAll(querySelector));
             } catch (error) {
-                // console.warn("Cannot access iframe due to cross-origin restrictions:", {error, iframe});
+                // Cannot access iframe due to cross-origin restrictions
                 return [];
             }
         })
@@ -98,7 +98,8 @@ function getCookieDeclineHTMLElementsInNestedMenu(querySelector) {
             const fn = () => {
                 clickSettingsButtonAndSearchForDecline(querySelector, cookieSettingButton);
             };
+            const textContent = cookieSettingButton.textContent;
 
-            return new ClickableExecutor(fn);
+            return new ClickableExecutor(fn, textContent);
         });
 }

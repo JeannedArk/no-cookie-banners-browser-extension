@@ -1,6 +1,25 @@
 <html>
+  <head></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Cookie Banners Extension</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
   <body>
-    <h1>No cookie banners extension is active &#127850;</h1>
-    <script src="popup.js"></script>
+    <script src="scripts/constants.js"></script>
+    <script src="scripts/storageutility.js"></script>
+    <script src="scripts/logger.js"></script>
+    <script src="scripts/popup.js"></script>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">No cookie banners extension is active &#127850;</h1>
+        </div>
+        <div class="card-content">
+            <p class="cookie-banner-found-container">
+              <span id="indicator" class="indicator"></span>
+              Cookie banner found
+            </p>
+        </div>
+    </div>
   </body>
 </html>

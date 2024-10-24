@@ -2,7 +2,7 @@ let logger = new Logger("NoCookieBanners", true);
 let declineCookieButtonPressed = false;
 const TIMEOUT_DELAYED_SEARCH = 2000;
 
-function clickCookieBanner() {
+async function clickCookieBanner() {
   const cookieButtons = getAllCookieDeclineButtons();
   const cookieButtonTexts = cookieButtons.map((cookieButton) => cookieButton.textContent);
   logger.log("clickCookieBanner", {cookieButtonTexts, cookieButtons});
@@ -11,27 +11,38 @@ function clickCookieBanner() {
       cookieButton.click();
     });
     declineCookieButtonPressed = true;
+    
+    try {
+      const msg = {
+        from: 'content',
+        subject: 'declineCookieButtonPressed',
+        payload: declineCookieButtonPressed,
+      };
+      await chrome.runtime.sendMessage(msg);
+    } catch (e) {
+      logger.error(e);
+    }
   }
 }
 
-function clickCookieBannerWhenNotTriggered() {
+async function clickCookieBannerWhenNotTriggered() {
   logger.log("clickCookieBannerWhenNotTriggered", {declineCookieButtonPressed});
   if (!declineCookieButtonPressed) {
-    clickCookieBanner();
+    await clickCookieBanner();
   }
 }
 
-function clickCookieBannerWhenPageReady() {
+async function clickCookieBannerWhenPageReady() {
   logger.log("Start");
   
-  window.addEventListener('load', function () {
+  window.addEventListener('load', async function () {
     logger.log("clickCookieBannerWhenPageReady event load");
-    clickCookieBannerWhenNotTriggered();
+    await clickCookieBannerWhenNotTriggered();
   });
   
-  setTimeout(() => {
+  setTimeout(async () => {
     logger.log("clickCookieBannerWhenPageReady event delayed");
-    clickCookieBannerWhenNotTriggered();
+    await clickCookieBannerWhenNotTriggered();
   }, TIMEOUT_DELAYED_SEARCH);
 }
 
@@ -48,4 +59,5 @@ function getAllCookieDeclineButtons() {
   return getAllCookieDeclineHTMLElements('button, span, a');
 }
 
+clearStorage();
 clickCookieBannerWhenPageReady();

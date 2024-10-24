@@ -13,3 +13,12 @@ Unfortunately, it is not possible as an extension to interact with cookie warnin
 
 The code for the extension is open-source.
 Feel free to create feature requests or bug reports on this GitHub repository: https://github.com/JeannedArk/no-cookie-banners-browser-extension
+
+
+
+
+## Debugging
+
+Those URLs are helpful to debug the extension:
+- `chrome://inspect/#service-workers`
+- `chrome://serviceworker-internals/?devtools`

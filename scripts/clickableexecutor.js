@@ -1,6 +1,7 @@
 class ClickableExecutor {
-    constructor(fn) {
+    constructor(fn, textContent) {
         this.fn = fn;
+        this.textContent = textContent;
     }
 
     click() {

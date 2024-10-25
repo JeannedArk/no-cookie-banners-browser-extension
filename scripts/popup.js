@@ -1,4 +1,4 @@
-const logger = new Logger("Popup", true);
+const logger = new Logger("Popup", false);
 
 function updatePopup() {
     logger.trace("DOMContentLoaded");

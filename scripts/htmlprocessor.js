@@ -17,10 +17,15 @@ function isHTMLElementVisible(htmlElement) {
     return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
 }
 
+function isHTMLElementNotRedirecting(htmlElement) {
+    return !htmlElement.href;
+}
+
 function getHTMLElementsSingleLabeledButton(querySelector, textWhitelist, fullMatch) {
     const buttons = Array.from(document.querySelectorAll(querySelector)) || [];
     return buttons
         .filter(isHTMLElementVisible)
+        .filter(isHTMLElementNotRedirecting)
         .filter((button) => {
             return fullMatch
                 ? fullTextMatch(textWhitelist, button.textContent)
@@ -41,13 +46,13 @@ function getCookieDeclineHTMLElementsInFlatMenu(querySelector) {
             const isCookieContext = divText.includes('cookie');
 
             if (isCookieContext) {
-                logger.log("getCookieDeclineHTMLElementsInFlatMenu", { divText, isCookieContext });
                 // Check if it contains a child element
                 const buttons = Array.from(div.querySelectorAll(querySelector));
                 const buttonsTexts = buttons.map((cookieButton) => cookieButton.textContent);
-                logger.log("getCookieDeclineHTMLElementsInFlatMenu", { buttonsTexts });
+                logger.log("getCookieDeclineHTMLElementsInFlatMenu", { divText, buttonsTexts });
                 return buttons
                     .filter(isHTMLElementVisible)
+                    .filter(isHTMLElementNotRedirecting)
                     .filter((button) => partialTextMatch(declineTexts, button.textContent));
             } else {
                 return [];
@@ -59,13 +64,10 @@ function getCookieDeclineHTMLElementsInFlatMenu(querySelector) {
 function clickSettingsButtonAndSearchForDecline(querySelector, settingsButton) {
     settingsButton.click();
 
-    logger.log("--- clickSettingsButtonAndSearchForDecline", {
-        settingsButtonText: settingsButton.textContent,
-    });
-
     const settingActionTexts = getSettingActionTexts();
     const settingActionButtons = getHTMLElementsSingleLabeledButton(querySelector, settingActionTexts, false);
     logger.log("clickSettingsButtonAndSearchForDecline", {
+        settingsButtonText: settingsButton.textContent,
         settingActionButtonsTexts: settingActionButtons.map((button) => button.textContent),
         settingActionButtons,
     });
@@ -86,6 +88,7 @@ function getCookieDeclineHTMLElementsInNestedMenu(querySelector) {
                 const buttons = Array.from(div.querySelectorAll(querySelector));
                 return buttons
                     .filter(isHTMLElementVisible)
+                    .filter(isHTMLElementNotRedirecting)
                     .filter((button) => partialTextMatch(settingTexts, button.textContent));
             } else {
                 return [];
@@ -100,6 +103,6 @@ function getCookieDeclineHTMLElementsInNestedMenu(querySelector) {
             };
             const textContent = cookieSettingButton.textContent;
 
-            return new ClickableExecutor(fn, textContent);
+            return new ClickableExecutor(fn, textContent, cookieSettingButton);
         });
 }

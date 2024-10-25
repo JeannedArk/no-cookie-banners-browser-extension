@@ -1,86 +1,42 @@
-body {
+.cookie-banner-extension-container {
     width: 300px;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 16px;
     background-color: #f4f4f4;
 }
-.card {
+
+.cookie-banner-extension-container .card {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
-.card-header {
+.cookie-banner-extension-container .card-header {
     background-color: #f0f0f0;
     padding: 16px;
     text-align: center;
 }
-.card-title {
+.cookie-banner-extension-container .card-title {
     margin: 0;
     font-size: 18px;
     font-weight: 600;
 }
-.card-content {
+.cookie-banner-extension-container .card-content {
     padding: 16px;
 }
-.toggle-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-}
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 24px;
-}
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-input:checked + .slider {
-    background-color: #2196F3;
-}
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-.cookie-banner-found-container {
+.cookie-banner-extension-container .cookie-banner-found-container {
     font-size: 14px;
     display: flex;
     align-items: center;
 }
-.indicator {
+.cookie-banner-extension-container .indicator {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     margin-right: 8px;
     background-color: #ccc;
 }
-.indicator.active {
+.cookie-banner-extension-container .indicator.active {
     background-color: #4CAF50;
 }

@@ -1,14 +1,18 @@
-let logger = new Logger("NoCookieBanners", false);
+let logger = new Logger("NoCookieBanners", true);
 let declineCookieButtonPressed = false;
 const TIMEOUT_DELAYED_SEARCH = 2000;
+
+function performClick(btn) {
+  btn.click();
+}
 
 async function clickCookieBanner() {
   const cookieButtons = getAllCookieDeclineButtons();
   const cookieButtonTexts = cookieButtons.map((cookieButton) => cookieButton.textContent);
-  logger.log("clickCookieBanner", {cookieButtonTexts, cookieButtons});
+  logger.log("> clickCookieBanner", {cookieButtonTexts, cookieButtons});
   if (cookieButtons?.length) {
     cookieButtons.forEach((cookieButton) => {
-      cookieButton.click();
+      performClick(cookieButton);
     });
     declineCookieButtonPressed = true;
     
@@ -47,12 +51,12 @@ async function clickCookieBannerWhenPageReady() {
 }
 
 function getAllCookieDeclineHTMLElements(querySelector) {
-  const buttonsSingleLabeledButton = getCookieDeclineHTMLElementsSingleLabeledButton(querySelector);
+  const buttonsSingleLabeledButton = getCookieDeclineOrAcceptHTMLElementsSingleLabeledButton(querySelector);
   const buttonsInFlatMenu = getCookieDeclineHTMLElementsInFlatMenu(querySelector);
-  const buttonsInNestedMenu = getCookieDeclineHTMLElementsInNestedMenu(querySelector);
+  // const buttonsInNestedMenu = getCookieDeclineHTMLElementsInNestedMenu(querySelector);
   
   // Deduplication
-  return toDeduplicatedArray([...buttonsSingleLabeledButton, ...buttonsInFlatMenu, ...buttonsInNestedMenu]);
+  return toDeduplicatedArray([...buttonsSingleLabeledButton, ...buttonsInFlatMenu]);
 }
 
 function getAllCookieDeclineButtons() {

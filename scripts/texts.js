@@ -1,11 +1,13 @@
 /**
  * @type {string[]}
  */
-const BUTTON_COOKIE_DECLINE_TEXTS = [
+const COOKIE_DECLINE_TEXTS = [
     // English
     "reject additional cookies",
-    "i refuse analytics cookies",
-    "reject all cookies",
+    "I refuse analytics cookies",
+    "Reject all cookies",
+    "Accept necessary only",
+    "Necessary cookies only",
     
     // German
     "Nur mit erforderlichen Cookies fortfahren",
@@ -14,7 +16,7 @@ const BUTTON_COOKIE_DECLINE_TEXTS = [
     "Analyse-Cookies ablehnen",
     
     // Spanish
-    "Rechazo las cookies de análisis.",
+    "Rechazo las cookies de análisis",
 
     // French
     "Je refuse les cookies analytiques",
@@ -23,8 +25,8 @@ const BUTTON_COOKIE_DECLINE_TEXTS = [
 /**
  * @returns {string[]}
  */
-function getButtonCookieDeclineTexts() {
-    return stringsTrimAndToLowerCase(BUTTON_COOKIE_DECLINE_TEXTS);
+function getCookieDeclineTexts() {
+    return stringsTrimAndToLowerCase(COOKIE_DECLINE_TEXTS);
 }
 
 
@@ -49,23 +51,114 @@ const DECLINE_TEXTS = [
     "weigeren"
 ];
 
+
+const COOKIE_ACCEPT_TEXTS = [
+    // English
+    "Accept all cookies",
+    "Accept additional cookies",
+
+    // German
+    "Alle Cookies akzeptieren",
+    "Cookies akzeptieren",
+
+    // Spanish
+    "Aceptar todas las cookies",
+
+    // French
+    "Accepter tous les cookies",
+
+    // Dutch
+    "Alle cookies accepteren",
+
+    // Italian
+    "Accetta tutti i cookie",
+];
+
 /**
  * @returns {string[]}
  */
-function getDeclineTexts() {
-    return stringsTrimAndToLowerCase(DECLINE_TEXTS);
+function getCookieAcceptTexts() {
+    return stringsTrimAndToLowerCase(COOKIE_ACCEPT_TEXTS);
+}
+
+
+const ACCEPT_TEXTS = [
+    // English
+    "Accept",
+
+    // German
+    "Akzeptieren",
+
+    // Spanish
+    "Aceptar",
+
+    // French
+    "Accepter",
+
+    // Dutch
+    "accepteren",
+
+    // Italian
+    "Accetta",
+];
+
+/**
+ * @returns {string[]}
+ */
+function getAcceptTexts() {
+    return stringsTrimAndToLowerCase(ACCEPT_TEXTS);
+}
+
+/**
+ * @returns {string[]}
+ */
+function getDeclineAndAcceptTexts() {
+    return stringsTrimAndToLowerCase([...DECLINE_TEXTS, ...ACCEPT_TEXTS]);
+}
+
+
+const COOKIES_SETTING_TEXTS = [
+    // English
+    "Cookies Settings",
+    "Configure cookies",
+    "Manage cookies",
+
+    // German
+    "Cookie-Einstellungen",
+    "Cookies verwalten",
+];
+
+/**
+ * @returns {string[]}
+ */
+function getCookiesSettingTexts() {
+    return stringsTrimAndToLowerCase(COOKIES_SETTING_TEXTS);
 }
 
 
 const SETTING_TEXTS = [
     // English
     "Settings",
+    "Options",
     "Configure",
-
+    "Manage",
+    
     // German
     "Einstellungen",
+    "Optionen",
     "anpassen",
     "verwalten",
+
+    // Spanish
+    "opciones",
+
+    // French
+    "options",
+    "opzioni",
+
+    // Dutch
+    "instellingen",
+    "aanpassen",
 ];
 
 /**
@@ -78,7 +171,6 @@ function getSettingTexts() {
 
 const SETTING_SAVE_TEXTS = [
     // English
-    // "Settings",
     "Save",
     "Confirm",
 
@@ -86,7 +178,8 @@ const SETTING_SAVE_TEXTS = [
     "speichern",
 ];
 
-const SETTING_ACTION_TEXTS = [...DECLINE_TEXTS, ...SETTING_SAVE_TEXTS];
+// const SETTING_ACTION_TEXTS = [...DECLINE_TEXTS, ...SETTING_SAVE_TEXTS];
+const SETTING_ACTION_TEXTS = [...COOKIE_DECLINE_TEXTS];
 
 /**
  * @returns {string[]}

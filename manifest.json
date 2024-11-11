@@ -27,6 +27,7 @@
                 "scripts/config.js",
                 "scripts/utility.js",
                 "scripts/storageutility.js",
+                "scripts/messageutility.js",
                 "scripts/constants.js",
                 "scripts/logger.js",
                 "scripts/texts.js",

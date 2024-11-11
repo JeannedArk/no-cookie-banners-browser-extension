@@ -17,12 +17,17 @@ async function clickCookieBanner() {
     declineCookieButtonPressed = true;
     
     try {
+      const domain = getDomain();
+      const payload = {
+        declineCookieButtonPressed,
+        domain,
+      };
       const msg = {
         from: 'content',
         subject: 'declineCookieButtonPressed',
-        payload: declineCookieButtonPressed,
+        payload: payload,
       };
-      await chrome.runtime.sendMessage(msg);
+      await sendMessage(msg);
     } catch (e) {
       logger.error(e);
     }
@@ -38,6 +43,8 @@ async function clickCookieBannerWhenNotTriggered() {
 
 async function clickCookieBannerWhenPageReady() {
   logger.log("Start");
+
+  initStorage();
   
   window.addEventListener('load', async function () {
     logger.log("clickCookieBannerWhenPageReady event load");
@@ -63,5 +70,4 @@ function getAllCookieDeclineButtons() {
   return getAllCookieDeclineHTMLElements('button, span, a');
 }
 
-clearStorage();
 clickCookieBannerWhenPageReady();

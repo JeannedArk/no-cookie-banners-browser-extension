@@ -1,16 +1,10 @@
-const chromeStorage = chrome.storage.sync;
-
-function clearStorage() {
-    chromeStorage.clear();
-}
-
 /**
- * https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/StorageArea/setAccessLevel
- * https://developer.chrome.com/docs/extensions/reference/api/storage#type-AccessLevel
+ * https://developer.chrome.com/docs/extensions/reference/api/storage#storage_areas
  */
-async function setAccessLevel() {
-    const accessLevel = "TRUSTED_AND_UNTRUSTED_CONTEXTS";
-    await chrome.storage.session.setAccessLevel({accessLevel});
+const chromeStorage = chrome.storage.session;
+
+async function clearStorage() {
+    await chromeStorage.clear();
 }
 
 function putToStorage(key, obj) {
@@ -26,6 +20,6 @@ function addListenerToStorage(callback) {
     // chrome.storage.onChanged.addListener(callback);
 }
 
-function initStorage() {
-    clearStorage();
+async function initStorage() {
+    await clearStorage();
 }

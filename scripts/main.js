@@ -44,7 +44,7 @@ async function clickCookieBannerWhenNotTriggered() {
 async function clickCookieBannerWhenPageReady() {
   logger.log("Start");
 
-  initStorage();
+  await initStorage();
   
   window.addEventListener('load', async function () {
     logger.log("clickCookieBannerWhenPageReady event load");

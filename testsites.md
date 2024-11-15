@@ -11,6 +11,7 @@
 | English | https://stackoverflow.com/ | Y | | |
 | English | https://www.bbc.com/ | N | | Doesn't work yet because of the form layout |
 | English | https://weather.com/ | N | | iFrame with different domain |
+| English | https://www.blenderkit.com/ | N | TODO investigate |
 | German | https://www.google.de/ | Y | | |
 | German | https://www.amazon.de/ | N | | Click event on the spans has no effect. The click event needs to be performed on the input child element. |
 | German | https://www.mercedes-benz.ch/ | N | Nested Menu | Title is not a parent element |

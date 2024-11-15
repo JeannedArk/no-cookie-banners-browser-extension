@@ -9,7 +9,7 @@
         "128": "images/icons/cookie-icon-128.png"
     },
     "action": {
-      "default_popup": "popup.html",
+      "default_popup": "src/popup.html",
       "default_icon": "images/icons/cookie-icon-16.png"
     },
     "permissions": [
@@ -17,25 +17,25 @@
         "tabs"
     ],
     "background": {
-        "service_worker": "scripts/background.js",
+        "service_worker": "src/js/background.js",
         "type": "module"
     },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "css": ["styles.css"],
+            "css": ["src/css/styles.css"],
             "js": [
-                "scripts/config.js",
-                "scripts/utility.js",
-                "scripts/storageutility.js",
-                "scripts/messageutility.js",
-                "scripts/tabutility.js",
-                "scripts/constants.js",
-                "scripts/logger.js",
-                "scripts/texts.js",
-                "scripts/clickableexecutor.js",
-                "scripts/htmlprocessor.js",
-                "scripts/main.js"
+                "src/js/config.js",
+                "src/js/utility.js",
+                "src/js/storageutility.js",
+                "src/js/messageutility.js",
+                "src/js/tabutility.js",
+                "src/js/constants.js",
+                "src/js/logger.js",
+                "src/js/texts.js",
+                "src/js/clickableexecutor.js",
+                "src/js/htmlprocessor.js",
+                "src/js/main.js"
             ]
         }
     ]

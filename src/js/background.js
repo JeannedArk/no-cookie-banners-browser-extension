@@ -50,12 +50,12 @@ async function clearStorageForTab() {
 async function handleMessages(msg, sender) {
     if (msg.from === msgFromContent && msg.subject === msgSubjectDeclineCookieButtonPressed) {
         const payload = msg.payload;
-        console.trace("[BACKGROUND] Message received", {msgSubjectDeclineCookieButtonPressed, payload});
+        // console.trace("[BACKGROUND] Message received", {msgSubjectDeclineCookieButtonPressed, payload});
 
         const tabId = await getCurrentTabId();
         await chromeStorage.set({[tabId]: payload.declineCookieButtonPressed});
     } else if (msg.from === msgFromContent && msg.subject === msgSubjectInitStorage) {
-        console.trace("[BACKGROUND] Message received", {msgSubjectInitStorage});
+        // console.trace("[BACKGROUND] Message received", {msgSubjectInitStorage});
         await clearStorageForTab();
     }
 }

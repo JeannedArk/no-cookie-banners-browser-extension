@@ -13,7 +13,8 @@
       "default_icon": "images/icons/cookie-icon-16.png"
     },
     "permissions": [
-        "storage"
+        "storage",
+        "tabs"
     ],
     "background": {
         "service_worker": "scripts/background.js",
@@ -28,6 +29,7 @@
                 "scripts/utility.js",
                 "scripts/storageutility.js",
                 "scripts/messageutility.js",
+                "scripts/tabutility.js",
                 "scripts/constants.js",
                 "scripts/logger.js",
                 "scripts/texts.js",

@@ -1,7 +1,7 @@
 const logger = new Logger("Popup", false);
 
 function updatePopup() {
-    logger.trace("DOMContentLoaded");
+    logger.trace("updatePopup DOMContentLoaded");
     const indicatorElement = document.getElementById('indicator');
 
     function updateCookiesFound(cookiesFound) {
@@ -12,16 +12,20 @@ function updatePopup() {
         }
     }
 
-    addListenerToStorage(function(changes, namespace) {
-        if (Constants.Storage.KEY_DECLINE_COOKIE_BUTTON_PRESSED in changes) {
-            const declineCookieButtonPressed = !!changes[Constants.Storage.KEY_DECLINE_COOKIE_BUTTON_PRESSED].newValue;
+    getCurrentTabId().then((tabId) => {
+        addListenerToStorage(function(changes, namespace) {
+            if (tabId in changes) {
+                const declineCookieButtonPressed = !!changes[tabId].newValue;
+                logger.trace("addListenerToStorage", {declineCookieButtonPressed, changes});
+                updateCookiesFound(declineCookieButtonPressed);
+            }
+        });
+    
+        getFromStorage(tabId, function (storageData) {
+            const declineCookieButtonPressed = !!storageData[tabId];
+            logger.trace("getFromStorage", {declineCookieButtonPressed, storageData});
             updateCookiesFound(declineCookieButtonPressed);
-        }
-    });
-
-    getFromStorage(Constants.Storage.KEY_DECLINE_COOKIE_BUTTON_PRESSED, function (storageData) {
-        const declineCookieButtonPressed = !!storageData[Constants.Storage.KEY_DECLINE_COOKIE_BUTTON_PRESSED];
-        updateCookiesFound(declineCookieButtonPressed);
+        });
     });
 }
 

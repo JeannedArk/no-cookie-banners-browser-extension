@@ -18,7 +18,7 @@
 | German | https://developer.chrome.com/docs/webstore/publish?hl=de | N | | |
 | German | https://www.vodafone.de/ | Y | | |
 | German | https://www.redhat.com/de | N | | iFrame with different domain |
-| German | https://www.prodyna.com/de | Y | | |
+| German | https://www.prodyna.com/de | N | | |
 | German | https://www.canva.com/de_de | Y | Nested Menu | |
 | German | https://fritz-kola.com/de | N | | |
 | German | https://www.zalando.ch/ | N | | Title naming |

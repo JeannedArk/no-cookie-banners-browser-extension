@@ -1,5 +1,8 @@
 /**
  * https://developer.chrome.com/docs/extensions/reference/api/storage#storage_areas
+ * 
+ * Use session storage because data doesn't need to be persisted and with local it would
+ * need to be explicitly deleted.
  */
 const chromeStorage = chrome.storage.session;
 
@@ -17,9 +20,4 @@ function getFromStorage(key, callback) {
 
 function addListenerToStorage(callback) {
     chromeStorage.onChanged.addListener(callback);
-    // chrome.storage.onChanged.addListener(callback);
-}
-
-async function initStorage() {
-    await clearStorage();
 }

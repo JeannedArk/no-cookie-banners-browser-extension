@@ -1,9 +1,29 @@
-let logger = new Logger("NoCookieBanners", true);
+let logger = new Logger("NoCookieBanners", false);
 let declineCookieButtonPressed = false;
 const TIMEOUT_DELAYED_SEARCH = 2000;
 
 function performClick(btn) {
   btn.click();
+}
+
+async function sendMessageDeclineCookieButtonPressed(declineCookieButtonPressed) {
+  const payload = {
+    declineCookieButtonPressed,
+  };
+  const msg = {
+    from: Constants.Message.MSG_FROM_CONTENT,
+    subject: Constants.Message.MSG_SUBJECT_DECLINE_COOKIE_BUTTON_PRESSED,
+    payload: payload,
+  };
+  await sendMessage(msg);
+}
+
+async function sendMessageInitStorage() {
+  const msg = {
+    from: Constants.Message.MSG_FROM_CONTENT,
+    subject: Constants.Message.MSG_SUBJECT_INIT_STORAGE,
+  };
+  await sendMessage(msg);
 }
 
 async function clickCookieBanner() {
@@ -17,17 +37,7 @@ async function clickCookieBanner() {
     declineCookieButtonPressed = true;
     
     try {
-      const domain = getDomain();
-      const payload = {
-        declineCookieButtonPressed,
-        domain,
-      };
-      const msg = {
-        from: 'content',
-        subject: 'declineCookieButtonPressed',
-        payload: payload,
-      };
-      await sendMessage(msg);
+      await sendMessageDeclineCookieButtonPressed(declineCookieButtonPressed);
     } catch (e) {
       logger.error(e);
     }
@@ -44,15 +54,15 @@ async function clickCookieBannerWhenNotTriggered() {
 async function clickCookieBannerWhenPageReady() {
   logger.log("Start");
 
-  await initStorage();
+  await sendMessageInitStorage();
   
   window.addEventListener('load', async function () {
-    logger.log("clickCookieBannerWhenPageReady event load");
+    logger.trace("clickCookieBannerWhenPageReady event load");
     await clickCookieBannerWhenNotTriggered();
   });
   
   setTimeout(async () => {
-    logger.log("clickCookieBannerWhenPageReady event delayed");
+    logger.trace("clickCookieBannerWhenPageReady event delayed");
     await clickCookieBannerWhenNotTriggered();
   }, TIMEOUT_DELAYED_SEARCH);
 }

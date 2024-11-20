@@ -19,7 +19,7 @@ Feel free to create feature requests or bug reports on this GitHub repository: h
 
 Like this project? **Leave a star**! ⭐
 
-You want to support the active development of this project?  [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/jeannedark)
+You want to support the active development of this project? [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/jeannedark)
 
 
 ## Debugging

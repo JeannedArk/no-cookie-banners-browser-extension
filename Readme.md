@@ -1,5 +1,10 @@
 # No Cookie Banners Browser Extension
 
+<p align="middle">
+  <img src="./screenshots/GoogleCookieWarningCrossedScaled.png" width="400" />
+  <img src="./screenshots/GoogleNoCookieWarningExtensionOpenScaledText.png" width="400" /> 
+</p>
+
 "No Cookie Banners" is browser extension to get rid of annoying cookie policy pop-ups.
 Say goodbye to cookie warnings.
 This extension tries to automatically deny all cookie requests whereas normally you would need to click "Refuse All Cookies".

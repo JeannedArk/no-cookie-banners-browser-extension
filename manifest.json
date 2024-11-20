@@ -16,7 +16,7 @@
         "storage"
     ],
     "background": {
-        "service_worker": "src/js/background.js",
+        "service_worker": "src/js/background/background.js",
         "type": "module"
     },
     "content_scripts": [
@@ -24,17 +24,17 @@
             "matches": ["<all_urls>"],
             "css": ["src/css/styles.css"],
             "js": [
-                "src/js/config.js",
-                "src/js/utility.js",
-                "src/js/storageutility.js",
-                "src/js/messageutility.js",
-                "src/js/tabutility.js",
                 "src/js/constants.js",
-                "src/js/logger.js",
-                "src/js/texts.js",
-                "src/js/clickableexecutor.js",
-                "src/js/htmlprocessor.js",
-                "src/js/main.js"
+                "src/js/utils/utility.js",
+                "src/js/utils/storageutility.js",
+                "src/js/utils/messageutility.js",
+                "src/js/utils/tabutility.js",
+                "src/js/utils/logger.js",
+                "src/js/content_script/config.js",
+                "src/js/content_script/texts.js",
+                "src/js/content_script/clickableexecutor.js",
+                "src/js/content_script/htmlprocessor.js",
+                "src/js/content_script/main.js"
             ]
         }
     ]

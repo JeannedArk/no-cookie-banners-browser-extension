@@ -26,6 +26,7 @@
             "js": [
                 "src/js/constants.js",
                 "src/js/utils/utility.js",
+                "src/js/utils/platformutility.js",
                 "src/js/utils/storageutility.js",
                 "src/js/utils/messageutility.js",
                 "src/js/utils/tabutility.js",

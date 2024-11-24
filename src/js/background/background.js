@@ -1,9 +1,20 @@
 // Importing other JS files did not work, therefore can't use utilities and constants here.
 
 /**
+ * Keep in sync with platformutility.js
+ */
+function isPlatformChrome() {
+    return typeof browser === "undefined";
+}
+
+const IS_CHROMIUM = isPlatformChrome();
+
+/**
  * Keep in sync with storageutility.js
  */
-const browserStorage = browser.storage.session;
+const browserStorage = IS_CHROMIUM
+    ? chrome.storage.session
+    : browser.storage.session;
 
 /**
  * Keep in sync with constants.js

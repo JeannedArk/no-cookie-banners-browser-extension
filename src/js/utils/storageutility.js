@@ -4,7 +4,9 @@
  * Use session storage because data doesn't need to be persisted and with local it would
  * need to be explicitly deleted.
  */
-const browserStorage = browser.storage.session;
+const browserStorage = IS_CHROMIUM
+    ? chrome.storage.session
+    : browser.storage.session;
 
 // async function clearStorage() {
 //     await chromeStorage.clear();

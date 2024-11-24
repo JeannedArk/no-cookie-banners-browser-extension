@@ -1,6 +1,6 @@
 const logger = new Logger("Popup", false);
 
-function updatePopup() {
+async function updatePopup() {
     logger.trace("updatePopup DOMContentLoaded");
     const indicatorElement = document.getElementById('indicator');
 
@@ -12,20 +12,19 @@ function updatePopup() {
         }
     }
 
-    getCurrentTabId().then((tabId) => {
-        addListenerToStorage(function(changes, namespace) {
-            if (tabId in changes) {
-                const declineCookieButtonPressed = !!changes[tabId].newValue;
-                logger.trace("addListenerToStorage", {declineCookieButtonPressed, changes});
-                updateCookiesFound(declineCookieButtonPressed);
-            }
-        });
-    
-        getFromStorage(tabId, function (storageData) {
-            const declineCookieButtonPressed = !!storageData[tabId];
-            logger.trace("getFromStorage", {declineCookieButtonPressed, storageData});
+    const tabId = await getCurrentTabId();
+    addListenerToStorage(function(changes, namespace) {
+        if (tabId in changes) {
+            const declineCookieButtonPressed = !!changes[tabId].newValue;
+            logger.trace("addListenerToStorage", {declineCookieButtonPressed, changes});
             updateCookiesFound(declineCookieButtonPressed);
-        });
+        }
+    });
+
+    getFromStorage(tabId, function (storageData) {
+        const declineCookieButtonPressed = !!storageData[tabId];
+        logger.trace("getFromStorage", {declineCookieButtonPressed, storageData});
+        updateCookiesFound(declineCookieButtonPressed);
     });
 }
 

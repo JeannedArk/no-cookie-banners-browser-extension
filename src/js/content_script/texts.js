@@ -8,6 +8,7 @@ const COOKIE_DECLINE_TEXTS = [
     "Reject all cookies",
     "Accept necessary only",
     "Necessary cookies only",
+    "Decline optional cookies",
     
     // German
     "Nur mit erforderlichen Cookies fortfahren",

@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p chrome-release
-          cp manifest.chrome.json manifest.json
+          mv manifest.chrome.json chrome-release/manifest.json
           cp -r Release.txt LICENSE src images chrome-release/
           zip -r chrome-release-${{ github.ref_name }}.zip chrome-release/
       
@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p firefox-release
-          cp manifest.firefox.json manifest.json
+          mv manifest.firefox.json firefox-release/manifest.json
           cp -r Release.txt LICENSE src images firefox-release/
           zip -r firefox-release-${{ github.ref_name }}.zip firefox-release/
 

@@ -3,7 +3,7 @@
 /**
  * Keep in sync with storageutility.js
  */
-const chromeStorage = chrome.storage.session;
+const browserStorage = browser.storage.session;
 
 /**
  * Keep in sync with constants.js
@@ -20,7 +20,7 @@ const msgSubjectInitStorage = 'initStorage';
  */
 function setAccessLevel() {
     const accessLevel = "TRUSTED_AND_UNTRUSTED_CONTEXTS";
-    chromeStorage.setAccessLevel({accessLevel});
+    browserStorage.setAccessLevel({accessLevel});
 }
 
 /**
@@ -34,7 +34,7 @@ async function getCurrentTabId() {
 }
 
 async function removeFromStorage(key) {
-    await chromeStorage.remove(key);
+    await browserStorage.remove(key);
 }
 
 /**
@@ -53,7 +53,7 @@ async function handleMessages(msg, sender) {
         // console.trace("[BACKGROUND] Message received", {msgSubjectDeclineCookieButtonPressed, payload});
 
         const tabId = await getCurrentTabId();
-        await chromeStorage.set({[tabId]: payload.declineCookieButtonPressed});
+        await browserStorage.set({[tabId]: payload.declineCookieButtonPressed});
     } else if (msg.from === msgFromContent && msg.subject === msgSubjectInitStorage) {
         // console.trace("[BACKGROUND] Message received", {msgSubjectInitStorage});
         await clearStorageForTab();
@@ -61,7 +61,7 @@ async function handleMessages(msg, sender) {
 }
 
 try {
-    setAccessLevel();
+    // setAccessLevel();
     chrome.runtime.onMessage.addListener(handleMessages);
 } catch (e) {
     console.error(e);

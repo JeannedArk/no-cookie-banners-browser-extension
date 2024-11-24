@@ -4,20 +4,20 @@
  * Use session storage because data doesn't need to be persisted and with local it would
  * need to be explicitly deleted.
  */
-const chromeStorage = chrome.storage.session;
+const browserStorage = browser.storage.session;
 
-async function clearStorage() {
-    await chromeStorage.clear();
-}
+// async function clearStorage() {
+//     await chromeStorage.clear();
+// }
 
-function putToStorage(key, obj) {
-    chromeStorage.set({[key]: obj});
-}
+// function putToStorage(key, obj) {
+//     chromeStorage.set({[key]: obj});
+// }
 
 function getFromStorage(key, callback) {
-    chromeStorage.get([key], callback);
+    browserStorage.get([key], callback);
 }
 
 function addListenerToStorage(callback) {
-    chromeStorage.onChanged.addListener(callback);
+    browserStorage.onChanged.addListener(callback);
 }

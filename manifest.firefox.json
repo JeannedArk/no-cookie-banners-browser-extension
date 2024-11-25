@@ -23,10 +23,11 @@
     },
     "browser_specific_settings": {
         "gecko": {
-            "strict_min_version": "112.0"
+            "id": "{95D5B482-4BC9-42EB-95B3-115C17238F21}",
+            "strict_min_version": "115.0"
         },
         "gecko_android": {
-            "strict_min_version": "112.0"
+            "strict_min_version": "115.0"
         }
     },
     "content_scripts": [

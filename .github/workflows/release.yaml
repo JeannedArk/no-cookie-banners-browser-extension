@@ -33,7 +33,9 @@ jobs:
           mkdir -p firefox-release
           mv manifest.firefox.json firefox-release/manifest.json
           cp -r Release.txt LICENSE src images firefox-release/
-          zip -r firefox-release-${{ github.ref_name }}.zip firefox-release/
+          # https://extensionworkshop.com/documentation/publish/package-your-extension/
+          cd firefox-release/
+          zip -r -FS ../firefox-release-${{ github.ref_name }}.zip * --exclude '*.git*'
 
       - name: Release
         uses: softprops/action-gh-release@v2
